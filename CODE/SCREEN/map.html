@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_7454ad50925ae522c543f48779a1b2a6 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_7454ad50925ae522c543f48779a1b2a6" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_7454ad50925ae522c543f48779a1b2a6 = L.map(
+                "map_7454ad50925ae522c543f48779a1b2a6",
+                {
+                    center: [35.15845, 126.795422],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 16,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_a236253216c54bdf71dee3f617344129 = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca target=\"_blank\" href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca target=\"_blank\" href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_7454ad50925ae522c543f48779a1b2a6);
+        
+    
+            var marker_29cea02059788ef11b7b3fb9a56aa548 = L.marker(
+                [35.15845, 126.795422],
+                {}
+            ).addTo(map_7454ad50925ae522c543f48779a1b2a6);
+        
+    
+            var icon_289d481d5a4a9e2acab1e81da946c7ed = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "key", "iconColor": "white", "markerColor": "red", "prefix": "fa"}
+            );
+            marker_29cea02059788ef11b7b3fb9a56aa548.setIcon(icon_289d481d5a4a9e2acab1e81da946c7ed);
+        
+    
+        var popup_915d41bf9cbd1f06bb7de84e3fc27aad = L.popup({"maxWidth": 100, "minWidth": 100});
+
+        
+            
+                var html_5620ee5b7e1da0b798efb96effc6291f = $(`<div id="html_5620ee5b7e1da0b798efb96effc6291f" style="width: 100.0%; height: 100.0%;">방탈출 카페</div>`)[0];
+                popup_915d41bf9cbd1f06bb7de84e3fc27aad.setContent(html_5620ee5b7e1da0b798efb96effc6291f);
+            
+        
+
+        marker_29cea02059788ef11b7b3fb9a56aa548.bindPopup(popup_915d41bf9cbd1f06bb7de84e3fc27aad)
+        ;
+
+        
+    
+</script>
+</html>

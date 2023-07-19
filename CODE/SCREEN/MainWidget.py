@@ -3,9 +3,10 @@ import datetime
 import folium
 from folium import Marker
 
-from PyQt5.QtWidgets import *
-from PyQt5.QtWidgets import QWidget, QApplication
-from PyQt5.QtCore import QUrl, Qt
+from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout, QHBoxLayout, QMainWindow, QApplication
+from PyQt5.QtGui import QPixmap
+
+from PyQt5.QtCore import QUrl
 from PyQt5 import QtWebEngineWidgets
 
 from CODE.SCREEN.UI_MainWidget import Ui_MainWindow
@@ -16,12 +17,26 @@ from CODE.CLIENT.Client import Client
 
 class Theme():
     def __init__(self, num, list_NM, list_IMG):
-        # 사용자 정의 QWidget 제작
 
         theme_container = QWidget()
         theme_container.setFixedSize()
 
+        layout = QVBoxLayout(theme_container)
 
+        for i in range(0, num, 4):
+            hbox = QHBoxLayout()
+            for j in range(4):
+                idx = i+j
+                if idx < num:
+                    lb_img = QLabel()
+                    lb_img.setPixmap(QPixmap(list_IMG[idx]))
+                    lb_nm = QLabel.setText(list_NM[idx])
+
+                    hbox.addWidget(lb_img)
+                    hbox.addWidget(lb_nm)
+
+            layout.addLayout(hbox)
+        theme_container.setLayout(layout)
 
 class LOGIN(QWidget, Ui_Login):
     def __init__(self):
@@ -36,10 +51,6 @@ class LOGIN(QWidget, Ui_Login):
 
         # --- DB연결
         self.db = DataRead()
-
-        # --- qwebview 객체 생성
-        self.webview = QtWebEngineWidgets.QWebEngineView(self.widget_map)
-        self.webview.resize(591, 411)
 
         # ---버튼 연결
         self.btn_membership.clicked.connect(lambda _, index=1: self.move_page(index))
@@ -134,9 +145,14 @@ class MainWindow(QMainWindow, Ui_MainWindow, Ui_Login):
         # --- DB연결
         self.db = DataRead()
 
+        # --- qwebview 객체 생성
+        self.webview = QtWebEngineWidgets.QWebEngineView(self.widget_map)
+        self.webview.resize(591, 411)
+
         # --- 함수 호출
         self.widget_clicked()
         self.inset_folium()
+        self.insert_theme()
 
     def widget_clicked(self):
         self.widget_theme.mousePressEvent = lambda e, name='theme': self.mousePressEvent(e, name)
@@ -156,23 +172,23 @@ class MainWindow(QMainWindow, Ui_MainWindow, Ui_Login):
 
     def insert_theme(self):
         theme_df = self.db.return_df('*', 'THEME_INFO')
+        print(theme_df)
         list_NM = theme_df.TH_NM.tolist()
         list_IMG = theme_df.TH_IMG.tolist()
         num = len(list_NM)
         self.theme = Theme(num, list_NM, list_IMG)
 
-
     def inset_folium(self):
         layout = QVBoxLayout()
         layout.addWidget(self.webview)
         self.widget_map.setLayout(layout)
-        map = folium.Map(location=[35.158450, 126.795422], zoom_start=14)
-        marker = folium.Marker(location=[35.158450, 126.795422], icon=folium.Icon(icon='marker')).add_to(map)
+        map = folium.Map(location=[35.158450, 126.795422], zoom_start=16)
+        marker = folium.Marker(location=[35.158450, 126.795422],
+                               icon=folium.Icon(color='red', icon='key', prefix='fa')).add_to(map)
         marker.add_child(folium.Popup("방탈출 카페", min_width=100, max_width=100))
         map.save('map.html')
         self.webview.setUrl(QUrl('file:///map.html'))
         self.webview.show()
-
 
 
 if __name__ == "__main__":

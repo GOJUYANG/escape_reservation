@@ -1,29 +1,32 @@
-import re
+from socket import *
+import pickle
 import select
 import threading
-from socket import *
 
 from CODE.SERVER.DataRead import DataRead
+from CODE.MAIN.DataClass import *
 from CODE.SCREEN.MainWidget import LOGIN, MainWindow
+
+import re
 
 header_split = chr(46) # .
 list_split = chr(58) # :
 
 class Server:
-    # 클래스변수 선언 (전역화)
-    ip = gethostbyname(gethostname())
-    PORT = 9999
-    FORMAT = 'utf-8'
-
     def __init__(self):
 
-        # --초기 값 설정
+        # --- 주소값 설정
+        self.ip = '10.10.20.104'
+        self.Port = 9999
+        self.listener = 10
+        self.FORMAT = 'utf-8'
+
+        # --- 초기값 설정
         self.ServerSocket = None
         self.list_Socket = list()
-        self.client: dict[tuple, list[socket.socket, str]] = {}
+        self.client: dict[tuple, list[socket, str]] = {}
         self.dict_: dict = {}
-        # self.running_thread = None
-        # self.receive_signal = True
+        self.init_socket()
 
        # --- db 연결
         self.db = DataRead()
@@ -36,16 +39,33 @@ class Server:
         self.ServerSocket = socket(AF_INET, SOCK_STREAM)
         # 소켓 연결 때 사용된 주소를 재사용 하도록 함
         self.ServerSocket.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
-        self.ServerSocket.bind(self.ip, self.PORT)
-        self.ServerSocket.listen()
+        # 서버 주소, 포트번호 저장 : 주의! (튜플)형식이다.
+        self.ServerSocket.bind(("", self.Port))
+        # 서버 소켓 연결 대기 상태
+        self.ServerSocket.listen(self.listener)
         print("서버가 시작되었습니다.")
 
-        # self.list_Socket.clear()
+        # 소켓 리스트 초기화
+        self.list_Socket.clear()
         self.list_Socket.append(self.ServerSocket)
 
         # 접속한 클라이언트 정보 key :(ip,포트번호), value : [소켓정보, 아이디]
-        self.client: dict[tuple, list[socket.socket, str]] = {}
+        self.client: dict[tuple, list[socket, str]] = {}
         print(self.client)
+
+    def connect(self):
+        # 접속한 클라이언트가 있는지 확인
+        if len(self.client):
+            return True
+        else:
+            return False
+
+    def disconnect(self, sock):
+        # 접속 종료한 클라이언트의 정보가 존재한다면
+        addr = sock.getpeername()
+        if addr in self.client:
+            # 클라이언트 정보 삭제
+            del self.client[addr]
 
     def recv_client(self):
         """Thread 타겟"""
@@ -73,10 +93,13 @@ class Server:
                     print(f"접속중임 : {c_addr}")
                     data = self.recv_client_req(r_socket)
 
+                    # data가 유효하지 않다면
                     if data is False:
+                        # r_socket은 메모리 정리 및 처리 건너뛰기
                         self.list_Socket.remove(r_socket)
                         del self.client[r_socket]
-                        continue # 정확한 의미 모르겠음...
+                        # 다음 소켓의 처리로 넘어간다
+                        continue
 
             # 수신데이터 소켓이 예외상황에 처한 경우
             for r_socket in except_sockets:

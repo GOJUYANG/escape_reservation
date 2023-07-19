@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QApplication
 import sqlite3 as sql3
 import pandas as pd
 
-class DataRead:
+class DataRea:
     def __init__(self):
 
         # --- 데이터베이스 연결
@@ -15,7 +15,6 @@ class DataRead:
         self.now = datetime.datetime.now().strftime("%y/%m/%d %H:%M:%S")
 
         # --- 함수호출
-        # self.return_df('TH_NM', 'THEME_INFO')
 
     def end_conn(self):  # db 종료
         self.conn.close()
@@ -77,12 +76,11 @@ class DataRead:
         self.commit_db()
         self.end_conn()
 
-    def return_df(self, c_type:str, tb_name:str):
-        """return : THEME_INFO 테이블"""
+    def return_df(self, c_type: str, tb_name: str):
+        """return : 테이블"""
         sql = f"select {c_type} from {tb_name}"
         df = pd.read_sql(sql, self.conn)
         return df
-
 
     # 테이블 비우기
     def clear_table(self, col_name):
@@ -119,7 +117,5 @@ class DataRead:
                 self.conn.execute(sql, data[k])
         self.commit_db()
 
-if __name__ == '__main__':
-    App = QApplication(sys.argv)
-    DATA = DataRead()
-    App.exec()
+# if __name__ == '__main__':
+#     DATA = DataRead()
