@@ -568,6 +568,55 @@
        </widget>
       </widget>
      </widget>
+     <widget class="QTableWidget" name="reservation_table">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>511</width>
+        <height>341</height>
+       </rect>
+      </property>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>102</number>
+      </attribute>
+      <attribute name="horizontalHeaderStretchLastSection">
+       <bool>false</bool>
+      </attribute>
+      <attribute name="verticalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
+      <row>
+       <property name="text">
+        <string>새 열</string>
+       </property>
+      </row>
+      <column>
+       <property name="text">
+        <string>예약번호</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>예약자ID</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>예약자ip</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>발송일자</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>발송인</string>
+       </property>
+      </column>
+     </widget>
      <widget class="QFrame" name="MESSAGE">
       <property name="geometry">
        <rect>
@@ -621,142 +670,6 @@ color:white;</string>
        </property>
       </widget>
      </widget>
-     <widget class="QTabWidget" name="tabWidget">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>0</y>
-        <width>511</width>
-        <height>361</height>
-       </rect>
-      </property>
-      <property name="currentIndex">
-       <number>1</number>
-      </property>
-      <widget class="QWidget" name="tab">
-       <attribute name="title">
-        <string>예약</string>
-       </attribute>
-       <widget class="QTableWidget" name="reservation_table">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>511</width>
-          <height>341</height>
-         </rect>
-        </property>
-        <attribute name="horizontalHeaderStretchLastSection">
-         <bool>true</bool>
-        </attribute>
-        <attribute name="verticalHeaderVisible">
-         <bool>false</bool>
-        </attribute>
-        <row>
-         <property name="text">
-          <string>새 열</string>
-         </property>
-        </row>
-        <column>
-         <property name="text">
-          <string>예약번호</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>예약자ID</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>예약자ip</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>마지막발송일자</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>마지막발송인</string>
-         </property>
-        </column>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="tab_2">
-       <attribute name="title">
-        <string>구독</string>
-       </attribute>
-       <widget class="QTableWidget" name="subscribe_table">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>501</width>
-          <height>271</height>
-         </rect>
-        </property>
-        <attribute name="horizontalHeaderDefaultSectionSize">
-         <number>125</number>
-        </attribute>
-        <attribute name="verticalHeaderVisible">
-         <bool>false</bool>
-        </attribute>
-        <column>
-         <property name="text">
-          <string>요청자ID</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>요청일자</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>구독테마</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>구독시간</string>
-         </property>
-        </column>
-       </widget>
-       <widget class="QLabel" name="lb_user_email">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>280</y>
-          <width>371</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">border:solid;
-border-width: 2px;
-border-color: rgb(0, 85, 255);</string>
-        </property>
-        <property name="text">
-         <string>Email</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="btn_send_eamil">
-        <property name="geometry">
-         <rect>
-          <x>410</x>
-          <y>280</y>
-          <width>81</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>이메일전송</string>
-        </property>
-       </widget>
-      </widget>
-     </widget>
     </widget>
     <widget class="QWidget" name="client_1">
      <widget class="QFrame" name="TITLE">
@@ -785,6 +698,9 @@ border-color: rgb(0, 85, 255);</string>
        </property>
        <property name="text">
         <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap>../IMG/logo_1.png</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -827,20 +743,17 @@ border-color: rgb(0, 85, 255);</string>
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
         <widget class="QWidget" name="widget_theme" native="true">
-         <widget class="QLabel" name="icon_theme">
+         <widget class="QLabel" name="label">
           <property name="geometry">
            <rect>
-            <x>10</x>
+            <x>0</x>
             <y>10</y>
-            <width>41</width>
-            <height>41</height>
+            <width>61</width>
+            <height>51</height>
            </rect>
           </property>
           <property name="text">
-           <string/>
-          </property>
-          <property name="pixmap">
-           <pixmap>../IMG/door.png</pixmap>
+           <string>icon</string>
           </property>
           <property name="scaledContents">
            <bool>true</bool>
@@ -849,91 +762,86 @@ border-color: rgb(0, 85, 255);</string>
            <set>Qt::AlignCenter</set>
           </property>
          </widget>
-         <widget class="QFrame" name="frame_theme">
+         <widget class="QWidget" name="layoutWidget_4">
           <property name="geometry">
            <rect>
             <x>60</x>
-            <y>40</y>
-            <width>80</width>
-            <height>10</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>80</width>
-            <height>10</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background-color: rgb(56, 186, 255);</string>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-         </widget>
-         <widget class="QLabel" name="lb_theme">
-          <property name="geometry">
-           <rect>
-            <x>60</x>
-            <y>1</y>
-            <width>109</width>
+            <y>10</y>
+            <width>111</width>
             <height>41</height>
            </rect>
           </property>
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>500</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>평창체 Regular</family>
-           </font>
-          </property>
-          <property name="text">
-           <string> 테마소개</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_5">
+           <item>
+            <widget class="QLabel" name="lb_theme">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>500</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>평창체 Regular</family>
+              </font>
+             </property>
+             <property name="text">
+              <string>   테마소개</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="frame_theme">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>10</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(56, 186, 255);
+border_radius:20px;</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
-         <zorder>frame_theme</zorder>
-         <zorder>lb_theme</zorder>
-         <zorder>icon_theme</zorder>
         </widget>
        </item>
        <item>
         <widget class="QWidget" name="widget_reservation" native="true">
-         <widget class="QLabel" name="icon_reservation">
+         <widget class="QLabel" name="label_11">
           <property name="geometry">
            <rect>
-            <x>10</x>
+            <x>0</x>
             <y>10</y>
-            <width>41</width>
-            <height>31</height>
+            <width>61</width>
+            <height>51</height>
            </rect>
           </property>
           <property name="text">
-           <string/>
-          </property>
-          <property name="pixmap">
-           <pixmap>../IMG/calendar.png</pixmap>
+           <string>icon</string>
           </property>
           <property name="scaledContents">
            <bool>true</bool>
@@ -942,91 +850,86 @@ border-color: rgb(0, 85, 255);</string>
            <set>Qt::AlignCenter</set>
           </property>
          </widget>
-         <widget class="QFrame" name="frame_reservation">
+         <widget class="QWidget" name="layoutWidget_5">
           <property name="geometry">
            <rect>
             <x>60</x>
-            <y>40</y>
-            <width>80</width>
-            <height>10</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>80</width>
-            <height>10</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background-color: rgb(56, 186, 255);</string>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-         </widget>
-         <widget class="QLabel" name="lb_reservation">
-          <property name="geometry">
-           <rect>
-            <x>60</x>
-            <y>0</y>
-            <width>109</width>
+            <y>10</y>
+            <width>111</width>
             <height>41</height>
            </rect>
           </property>
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>500</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>평창체 Regular</family>
-           </font>
-          </property>
-          <property name="text">
-           <string>예약 하기</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_6">
+           <item>
+            <widget class="QLabel" name="lb_reservation">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>500</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>평창체 Regular</family>
+              </font>
+             </property>
+             <property name="text">
+              <string>  예약 하기</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="frame_reservation">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>10</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(56, 186, 255);
+border_radius:20px;</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
-         <zorder>frame_reservation</zorder>
-         <zorder>lb_reservation</zorder>
-         <zorder>icon_reservation</zorder>
         </widget>
        </item>
        <item>
         <widget class="QWidget" name="widget_folium" native="true">
-         <widget class="QLabel" name="icon_folium">
+         <widget class="QLabel" name="label_13">
           <property name="geometry">
            <rect>
-            <x>10</x>
+            <x>0</x>
             <y>10</y>
-            <width>41</width>
-            <height>41</height>
+            <width>61</width>
+            <height>51</height>
            </rect>
           </property>
           <property name="text">
-           <string/>
-          </property>
-          <property name="pixmap">
-           <pixmap>../IMG/location.png</pixmap>
+           <string>icon</string>
           </property>
           <property name="scaledContents">
            <bool>true</bool>
@@ -1035,91 +938,86 @@ border-color: rgb(0, 85, 255);</string>
            <set>Qt::AlignCenter</set>
           </property>
          </widget>
-         <widget class="QFrame" name="frame_folium">
+         <widget class="QWidget" name="layoutWidget_6">
           <property name="geometry">
            <rect>
             <x>60</x>
-            <y>40</y>
-            <width>80</width>
-            <height>10</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>80</width>
-            <height>10</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background-color: rgb(56, 186, 255);</string>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-         </widget>
-         <widget class="QLabel" name="lb_folium">
-          <property name="geometry">
-           <rect>
-            <x>60</x>
-            <y>1</y>
-            <width>109</width>
+            <y>10</y>
+            <width>111</width>
             <height>41</height>
            </rect>
           </property>
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>500</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>평창체 Regular</family>
-           </font>
-          </property>
-          <property name="text">
-           <string>매장 위치</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_7">
+           <item>
+            <widget class="QLabel" name="lb_folium">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>500</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>평창체 Regular</family>
+              </font>
+             </property>
+             <property name="text">
+              <string>  매장 위치</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="frame_folium">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>10</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(56, 186, 255);
+border_radius:20px;</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
-         <zorder>frame_folium</zorder>
-         <zorder>lb_folium</zorder>
-         <zorder>icon_folium</zorder>
         </widget>
        </item>
        <item>
         <widget class="QWidget" name="widget_request" native="true">
-         <widget class="QLabel" name="icon_request">
+         <widget class="QLabel" name="label_15">
           <property name="geometry">
            <rect>
-            <x>10</x>
+            <x>0</x>
             <y>10</y>
-            <width>41</width>
-            <height>31</height>
+            <width>61</width>
+            <height>51</height>
            </rect>
           </property>
           <property name="text">
-           <string/>
-          </property>
-          <property name="pixmap">
-           <pixmap>../IMG/key.png</pixmap>
+           <string>icon</string>
           </property>
           <property name="scaledContents">
            <bool>true</bool>
@@ -1128,73 +1026,71 @@ border-color: rgb(0, 85, 255);</string>
            <set>Qt::AlignCenter</set>
           </property>
          </widget>
-         <widget class="QFrame" name="frame_request">
+         <widget class="QWidget" name="layoutWidget_7">
           <property name="geometry">
            <rect>
             <x>60</x>
-            <y>40</y>
-            <width>80</width>
-            <height>10</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>80</width>
-            <height>10</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background-color: rgb(56, 186, 255);</string>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-         </widget>
-         <widget class="QLabel" name="lb_request">
-          <property name="geometry">
-           <rect>
-            <x>60</x>
-            <y>2</y>
-            <width>109</width>
+            <y>10</y>
+            <width>113</width>
             <height>41</height>
            </rect>
           </property>
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>500</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>평창체 Regular</family>
-           </font>
-          </property>
-          <property name="text">
-           <string>예약 수정/취소</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_8">
+           <item>
+            <widget class="QLabel" name="lb_request">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>500</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>평창체 Regular</family>
+              </font>
+             </property>
+             <property name="text">
+              <string>  예약 수정/취소</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="frame_request">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>10</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(56, 186, 255);
+border_radius:20px;</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
-         <zorder>frame_request</zorder>
-         <zorder>lb_request</zorder>
-         <zorder>icon_request</zorder>
         </widget>
        </item>
       </layout>
@@ -1209,16 +1105,16 @@ border-color: rgb(0, 85, 255);</string>
        </rect>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="page_theme">
        <widget class="QLabel" name="label_17">
         <property name="geometry">
          <rect>
           <x>230</x>
-          <y>-20</y>
+          <y>0</y>
           <width>221</width>
-          <height>61</height>
+          <height>51</height>
          </rect>
         </property>
         <property name="font">
@@ -1236,66 +1132,30 @@ border-color: rgb(0, 85, 255);</string>
          <set>Qt::AlignCenter</set>
         </property>
        </widget>
-       <widget class="QScrollArea" name="scrollArea_theme">
+       <widget class="QScrollArea" name="scrollArea_2">
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>30</y>
+          <y>50</y>
           <width>691</width>
-          <height>631</height>
+          <height>611</height>
          </rect>
         </property>
-        <property name="sizeAdjustPolicy">
-         <enum>QAbstractScrollArea::AdjustToContents</enum>
+        <property name="verticalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOn</enum>
         </property>
         <property name="widgetResizable">
          <bool>true</bool>
         </property>
-        <widget class="QWidget" name="scrollAreaWidgetContents_2">
+        <widget class="QWidget" name="scroll_widget_theme">
          <property name="geometry">
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>689</width>
-           <height>629</height>
+           <width>668</width>
+           <height>609</height>
           </rect>
          </property>
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="mouseTracking">
-          <bool>true</bool>
-         </property>
-         <property name="focusPolicy">
-          <enum>Qt::ClickFocus</enum>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_3">
-          <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
-          <property name="spacing">
-           <number>0</number>
-          </property>
-          <item row="0" column="0">
-           <layout class="QGridLayout" name="gridLayout_2">
-            <property name="sizeConstraint">
-             <enum>QLayout::SetMaximumSize</enum>
-            </property>
-           </layout>
-          </item>
-         </layout>
         </widget>
        </widget>
       </widget>
@@ -1303,10 +1163,10 @@ border-color: rgb(0, 85, 255);</string>
        <widget class="QFrame" name="frame_2">
         <property name="geometry">
          <rect>
-          <x>30</x>
+          <x>40</x>
           <y>110</y>
           <width>191</width>
-          <height>241</height>
+          <height>251</height>
          </rect>
         </property>
         <property name="frameShape">
@@ -1315,7 +1175,7 @@ border-color: rgb(0, 85, 255);</string>
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
-        <widget class="QLabel" name="lb_th_img">
+        <widget class="QLabel" name="label_37">
          <property name="geometry">
           <rect>
            <x>0</x>
@@ -1326,9 +1186,6 @@ border-color: rgb(0, 85, 255);</string>
          </property>
          <property name="text">
           <string>pic</string>
-         </property>
-         <property name="scaledContents">
-          <bool>true</bool>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -1414,7 +1271,7 @@ border-color: rgb(0, 85, 255);</string>
           <string notr="true">color:white;</string>
          </property>
          <property name="text">
-          <string/>
+          <string>★★★★★</string>
          </property>
         </widget>
         <widget class="QLabel" name="lb_theme_num">
@@ -1430,7 +1287,7 @@ border-color: rgb(0, 85, 255);</string>
           <string notr="true">color:white;</string>
          </property>
          <property name="text">
-          <string/>
+          <string> 2~5인</string>
          </property>
         </widget>
         <widget class="QLabel" name="lb_theme_time">
@@ -1501,7 +1358,7 @@ border-color: rgb(0, 85, 255);</string>
          <enum>Qt::Horizontal</enum>
         </property>
        </widget>
-       <widget class="QPushButton" name="btn_time_1">
+       <widget class="QPushButton" name="pushButton">
         <property name="geometry">
          <rect>
           <x>30</x>
@@ -1510,14 +1367,6 @@ border-color: rgb(0, 85, 255);</string>
           <height>51</height>
          </rect>
         </property>
-        <property name="font">
-         <font>
-          <family>EF_수박화체</family>
-          <pointsize>10</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
         <property name="styleSheet">
          <string notr="true">QPushButton {
 background-color: rgb(255, 184, 5);
@@ -1535,7 +1384,7 @@ color:white
          <bool>false</bool>
         </property>
        </widget>
-       <widget class="QPushButton" name="btn_time_2">
+       <widget class="QPushButton" name="pushButton_2">
         <property name="geometry">
          <rect>
           <x>160</x>
@@ -1544,14 +1393,6 @@ color:white
           <height>51</height>
          </rect>
         </property>
-        <property name="font">
-         <font>
-          <family>EF_수박화체</family>
-          <pointsize>10</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
         <property name="styleSheet">
          <string notr="true">QPushButton {
 background-color: rgb(255, 184, 5);
@@ -1569,7 +1410,7 @@ color:white
          <bool>false</bool>
         </property>
        </widget>
-       <widget class="QPushButton" name="btn_time_3">
+       <widget class="QPushButton" name="pushButton_3">
         <property name="geometry">
          <rect>
           <x>290</x>
@@ -1577,14 +1418,6 @@ color:white
           <width>121</width>
           <height>51</height>
          </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>EF_수박화체</family>
-          <pointsize>10</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
         </property>
         <property name="styleSheet">
          <string notr="true">QPushButton {
@@ -1606,7 +1439,7 @@ color:white
          <bool>false</bool>
         </property>
        </widget>
-       <widget class="QPushButton" name="btn_time_4">
+       <widget class="QPushButton" name="pushButton_4">
         <property name="geometry">
          <rect>
           <x>420</x>
@@ -1614,14 +1447,6 @@ color:white
           <width>121</width>
           <height>51</height>
          </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>EF_수박화체</family>
-          <pointsize>10</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
         </property>
         <property name="styleSheet">
          <string notr="true">QPushButton {
@@ -1640,7 +1465,7 @@ color:white
          <bool>false</bool>
         </property>
        </widget>
-       <widget class="QPushButton" name="btn_time_5">
+       <widget class="QPushButton" name="pushButton_5">
         <property name="geometry">
          <rect>
           <x>550</x>
@@ -1649,14 +1474,6 @@ color:white
           <height>51</height>
          </rect>
         </property>
-        <property name="font">
-         <font>
-          <family>EF_수박화체</family>
-          <pointsize>10</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
         <property name="styleSheet">
          <string notr="true">QPushButton {
 background-color: rgb(255, 184, 5);
@@ -1674,7 +1491,7 @@ color:white
          <bool>false</bool>
         </property>
        </widget>
-       <widget class="QPushButton" name="btn_time_8">
+       <widget class="QPushButton" name="pushButton_6">
         <property name="geometry">
          <rect>
           <x>290</x>
@@ -1683,14 +1500,6 @@ color:white
           <height>51</height>
          </rect>
         </property>
-        <property name="font">
-         <font>
-          <family>EF_수박화체</family>
-          <pointsize>10</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
         <property name="styleSheet">
          <string notr="true">QPushButton {
 background-color: rgb(255, 184, 5);
@@ -1708,7 +1517,7 @@ color:white
          <bool>false</bool>
         </property>
        </widget>
-       <widget class="QPushButton" name="btn_time_7">
+       <widget class="QPushButton" name="pushButton_8">
         <property name="geometry">
          <rect>
           <x>160</x>
@@ -1717,14 +1526,6 @@ color:white
           <height>51</height>
          </rect>
         </property>
-        <property name="font">
-         <font>
-          <family>EF_수박화체</family>
-          <pointsize>10</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
         <property name="styleSheet">
          <string notr="true">QPushButton {
 background-color: rgb(255, 184, 5);
@@ -1742,7 +1543,7 @@ color:white
          <bool>false</bool>
         </property>
        </widget>
-       <widget class="QPushButton" name="btn_time_6">
+       <widget class="QPushButton" name="pushButton_9">
         <property name="geometry">
          <rect>
           <x>30</x>
@@ -1751,14 +1552,6 @@ color:white
           <height>51</height>
          </rect>
         </property>
-        <property name="font">
-         <font>
-          <family>EF_수박화체</family>
-          <pointsize>10</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
         <property name="styleSheet">
          <string notr="true">QPushButton {
 background-color: rgb(255, 184, 5);
@@ -1776,7 +1569,7 @@ color:white
          <bool>false</bool>
         </property>
        </widget>
-       <widget class="QPushButton" name="btn_time_9">
+       <widget class="QPushButton" name="pushButton_10">
         <property name="geometry">
          <rect>
           <x>420</x>
@@ -1784,14 +1577,6 @@ color:white
           <width>121</width>
           <height>51</height>
          </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>EF_수박화체</family>
-          <pointsize>10</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
         </property>
         <property name="styleSheet">
          <string notr="true">QPushButton {
@@ -1860,7 +1645,7 @@ color:white
          <rect>
           <x>240</x>
           <y>110</y>
-          <width>181</width>
+          <width>71</width>
           <height>41</height>
          </rect>
         </property>
@@ -1874,10 +1659,10 @@ color:white
          <string>테마명</string>
         </property>
         <property name="alignment">
-         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
-       <widget class="QLabel" name="lb_th_info">
+       <widget class="QLabel" name="label_39">
         <property name="geometry">
          <rect>
           <x>240</x>
@@ -1919,7 +1704,7 @@ color:white
               <string notr="true">background-color: rgb(81, 81, 81);
 color:white;</string>
              </property>
-             <widget class="QLabel" name="th_1">
+             <widget class="QLabel" name="label_25">
               <property name="geometry">
                <rect>
                 <x>0</x>
@@ -1931,15 +1716,10 @@ color:white;</string>
               <property name="font">
                <font>
                 <family>평창체 Regular</family>
-                <weight>75</weight>
-                <bold>true</bold>
                </font>
               </property>
               <property name="text">
-               <string/>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
+               <string>TextLabel</string>
               </property>
              </widget>
             </widget>
@@ -1950,7 +1730,7 @@ color:white;</string>
               <string notr="true">background-color: rgb(81, 81, 81);
 color:white;</string>
              </property>
-             <widget class="QLabel" name="th_2">
+             <widget class="QLabel" name="label_26">
               <property name="geometry">
                <rect>
                 <x>0</x>
@@ -1962,15 +1742,10 @@ color:white;</string>
               <property name="font">
                <font>
                 <family>평창체 Regular</family>
-                <weight>75</weight>
-                <bold>true</bold>
                </font>
               </property>
               <property name="text">
-               <string/>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
+               <string>TextLabel</string>
               </property>
              </widget>
             </widget>
@@ -1981,7 +1756,7 @@ color:white;</string>
               <string notr="true">background-color: rgb(81, 81, 81);
 color:white;</string>
              </property>
-             <widget class="QLabel" name="th_3">
+             <widget class="QLabel" name="label_27">
               <property name="geometry">
                <rect>
                 <x>0</x>
@@ -1993,15 +1768,10 @@ color:white;</string>
               <property name="font">
                <font>
                 <family>평창체 Regular</family>
-                <weight>75</weight>
-                <bold>true</bold>
                </font>
               </property>
               <property name="text">
-               <string/>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
+               <string>TextLabel</string>
               </property>
              </widget>
             </widget>
@@ -2012,7 +1782,7 @@ color:white;</string>
               <string notr="true">background-color: rgb(81, 81, 81);
 color:white;</string>
              </property>
-             <widget class="QLabel" name="th_4">
+             <widget class="QLabel" name="label_28">
               <property name="geometry">
                <rect>
                 <x>0</x>
@@ -2024,15 +1794,10 @@ color:white;</string>
               <property name="font">
                <font>
                 <family>평창체 Regular</family>
-                <weight>75</weight>
-                <bold>true</bold>
                </font>
               </property>
               <property name="text">
-               <string/>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
+               <string>TextLabel</string>
               </property>
              </widget>
             </widget>
@@ -2043,7 +1808,7 @@ color:white;</string>
               <string notr="true">background-color: rgb(81, 81, 81);
 color:white;</string>
              </property>
-             <widget class="QLabel" name="th_5">
+             <widget class="QLabel" name="label_29">
               <property name="geometry">
                <rect>
                 <x>0</x>
@@ -2055,15 +1820,10 @@ color:white;</string>
               <property name="font">
                <font>
                 <family>평창체 Regular</family>
-                <weight>75</weight>
-                <bold>true</bold>
                </font>
               </property>
               <property name="text">
-               <string/>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
+               <string>TextLabel</string>
               </property>
              </widget>
             </widget>
@@ -2074,7 +1834,7 @@ color:white;</string>
               <string notr="true">background-color: rgb(81, 81, 81);
 color:white;</string>
              </property>
-             <widget class="QLabel" name="th_6">
+             <widget class="QLabel" name="label_30">
               <property name="geometry">
                <rect>
                 <x>0</x>
@@ -2086,15 +1846,10 @@ color:white;</string>
               <property name="font">
                <font>
                 <family>평창체 Regular</family>
-                <weight>75</weight>
-                <bold>true</bold>
                </font>
               </property>
               <property name="text">
-               <string/>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
+               <string>TextLabel</string>
               </property>
              </widget>
             </widget>
@@ -2112,7 +1867,7 @@ color:white;</string>
               <string notr="true">background-color: rgb(81, 81, 81);
 color:white;</string>
              </property>
-             <widget class="QLabel" name="th_7">
+             <widget class="QLabel" name="label_31">
               <property name="geometry">
                <rect>
                 <x>0</x>
@@ -2124,15 +1879,10 @@ color:white;</string>
               <property name="font">
                <font>
                 <family>평창체 Regular</family>
-                <weight>75</weight>
-                <bold>true</bold>
                </font>
               </property>
               <property name="text">
-               <string/>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
+               <string>TextLabel</string>
               </property>
              </widget>
             </widget>
@@ -2143,7 +1893,7 @@ color:white;</string>
               <string notr="true">background-color: rgb(81, 81, 81);
 color:white;</string>
              </property>
-             <widget class="QLabel" name="th_8">
+             <widget class="QLabel" name="label_32">
               <property name="geometry">
                <rect>
                 <x>0</x>
@@ -2155,15 +1905,10 @@ color:white;</string>
               <property name="font">
                <font>
                 <family>평창체 Regular</family>
-                <weight>75</weight>
-                <bold>true</bold>
                </font>
               </property>
               <property name="text">
-               <string/>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
+               <string>TextLabel</string>
               </property>
              </widget>
             </widget>
@@ -2174,7 +1919,7 @@ color:white;</string>
               <string notr="true">background-color: rgb(81, 81, 81);
 color:white;</string>
              </property>
-             <widget class="QLabel" name="th_9">
+             <widget class="QLabel" name="label_33">
               <property name="geometry">
                <rect>
                 <x>0</x>
@@ -2186,15 +1931,10 @@ color:white;</string>
               <property name="font">
                <font>
                 <family>평창체 Regular</family>
-                <weight>75</weight>
-                <bold>true</bold>
                </font>
               </property>
               <property name="text">
-               <string/>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
+               <string>TextLabel</string>
               </property>
              </widget>
             </widget>
@@ -2205,7 +1945,7 @@ color:white;</string>
               <string notr="true">background-color: rgb(81, 81, 81);
 color:white;</string>
              </property>
-             <widget class="QLabel" name="th_10">
+             <widget class="QLabel" name="label_34">
               <property name="geometry">
                <rect>
                 <x>0</x>
@@ -2217,15 +1957,10 @@ color:white;</string>
               <property name="font">
                <font>
                 <family>평창체 Regular</family>
-                <weight>75</weight>
-                <bold>true</bold>
                </font>
               </property>
               <property name="text">
-               <string/>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
+               <string>TextLabel</string>
               </property>
              </widget>
             </widget>
@@ -2236,7 +1971,7 @@ color:white;</string>
               <string notr="true">background-color: rgb(81, 81, 81);
 color:white;</string>
              </property>
-             <widget class="QLabel" name="th_11">
+             <widget class="QLabel" name="label_35">
               <property name="geometry">
                <rect>
                 <x>0</x>
@@ -2248,15 +1983,10 @@ color:white;</string>
               <property name="font">
                <font>
                 <family>평창체 Regular</family>
-                <weight>75</weight>
-                <bold>true</bold>
                </font>
               </property>
               <property name="text">
-               <string/>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
+               <string>TextLabel</string>
               </property>
              </widget>
             </widget>
@@ -2267,7 +1997,7 @@ color:white;</string>
               <string notr="true">background-color: rgb(81, 81, 81);
 color:white;</string>
              </property>
-             <widget class="QLabel" name="th_12">
+             <widget class="QLabel" name="label_36">
               <property name="geometry">
                <rect>
                 <x>0</x>
@@ -2279,15 +2009,10 @@ color:white;</string>
               <property name="font">
                <font>
                 <family>평창체 Regular</family>
-                <weight>75</weight>
-                <bold>true</bold>
                </font>
               </property>
               <property name="text">
-               <string/>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
+               <string>TextLabel</string>
               </property>
              </widget>
             </widget>

@@ -25,7 +25,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_b31b5840f47b10acce3bfe8aa3ece03f {
+                #map_7454ad50925ae522c543f48779a1b2a6 {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -39,18 +39,18 @@
 <body>
     
     
-            <div class="folium-map" id="map_b31b5840f47b10acce3bfe8aa3ece03f" ></div>
+            <div class="folium-map" id="map_7454ad50925ae522c543f48779a1b2a6" ></div>
         
 </body>
 <script>
     
     
-            var map_b31b5840f47b10acce3bfe8aa3ece03f = L.map(
-                "map_b31b5840f47b10acce3bfe8aa3ece03f",
+            var map_7454ad50925ae522c543f48779a1b2a6 = L.map(
+                "map_7454ad50925ae522c543f48779a1b2a6",
                 {
                     center: [35.15845, 126.795422],
                     crs: L.CRS.EPSG3857,
-                    zoom: 14,
+                    zoom: 16,
                     zoomControl: true,
                     preferCanvas: false,
                 }
@@ -60,34 +60,34 @@
 
         
     
-            var tile_layer_47bad432c07b9c038e744b69b436f130 = L.tileLayer(
+            var tile_layer_a236253216c54bdf71dee3f617344129 = L.tileLayer(
                 "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
                 {"attribution": "Data by \u0026copy; \u003ca target=\"_blank\" href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca target=\"_blank\" href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
-            ).addTo(map_b31b5840f47b10acce3bfe8aa3ece03f);
+            ).addTo(map_7454ad50925ae522c543f48779a1b2a6);
         
     
-            var marker_669ecc561e1e46e61a16eecc98641386 = L.marker(
+            var marker_29cea02059788ef11b7b3fb9a56aa548 = L.marker(
                 [35.15845, 126.795422],
                 {}
-            ).addTo(map_b31b5840f47b10acce3bfe8aa3ece03f);
+            ).addTo(map_7454ad50925ae522c543f48779a1b2a6);
         
     
-            var icon_e6d817a3a4d938c89c8ea23dfbe8d270 = L.AwesomeMarkers.icon(
-                {"extraClasses": "fa-rotate-0", "icon": "marker", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            var icon_289d481d5a4a9e2acab1e81da946c7ed = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "key", "iconColor": "white", "markerColor": "red", "prefix": "fa"}
             );
-            marker_669ecc561e1e46e61a16eecc98641386.setIcon(icon_e6d817a3a4d938c89c8ea23dfbe8d270);
+            marker_29cea02059788ef11b7b3fb9a56aa548.setIcon(icon_289d481d5a4a9e2acab1e81da946c7ed);
         
     
-        var popup_3837294be2299e88402f0091519ee33a = L.popup({"maxWidth": 100, "minWidth": 100});
+        var popup_915d41bf9cbd1f06bb7de84e3fc27aad = L.popup({"maxWidth": 100, "minWidth": 100});
 
         
             
-                var html_e9a0278531c7b3a1e45fb182b6ff0266 = $(`<div id="html_e9a0278531c7b3a1e45fb182b6ff0266" style="width: 100.0%; height: 100.0%;">방탈출 카페</div>`)[0];
-                popup_3837294be2299e88402f0091519ee33a.setContent(html_e9a0278531c7b3a1e45fb182b6ff0266);
+                var html_5620ee5b7e1da0b798efb96effc6291f = $(`<div id="html_5620ee5b7e1da0b798efb96effc6291f" style="width: 100.0%; height: 100.0%;">방탈출 카페</div>`)[0];
+                popup_915d41bf9cbd1f06bb7de84e3fc27aad.setContent(html_5620ee5b7e1da0b798efb96effc6291f);
             
         
 
-        marker_669ecc561e1e46e61a16eecc98641386.bindPopup(popup_3837294be2299e88402f0091519ee33a)
+        marker_29cea02059788ef11b7b3fb9a56aa548.bindPopup(popup_915d41bf9cbd1f06bb7de84e3fc27aad)
         ;
 
         
