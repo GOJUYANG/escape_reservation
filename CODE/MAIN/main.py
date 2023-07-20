@@ -7,7 +7,8 @@ from CODE.SCREEN.MainWidget import MainWindow
 
 def main():
     app = QApplication(sys.argv)
-    # app.setStyle("Fusion")
+    # 위젯 스타일
+    app.setStyle("Plastique")
 
     # 글꼴 설정
     fontDB = QFontDatabase()
