@@ -1,5 +1,7 @@
 import pickle
 import socket
+import queue
+import zlib
 
 from threading import Thread
 from CODE.MAIN.DataClass import *
@@ -39,7 +41,7 @@ class Server:
 
         # 접속한 클라이언트 정보 key :(ip,포트번호), value : [소켓정보, 아이디]
         self.client: dict[tuple, list[socket.socket, str]] = {}
-        print(self.client)
+        print(f"client: {self.client}")
 
     # 접속한 클라이언트가 있는지 확인한다 -> 클라이언트 전송함수에서 조건문 활용
     def connected(self):
@@ -47,15 +49,6 @@ class Server:
             return True
         else:
             return False
-
-    def accept(self):
-        sock, addr = self.ServerSocket.accept()
-
-        print(" [ 클라이언트 접속 ] ")
-        self.client[addr] = [sock, ""]
-        print("------------------")
-
-        return sock, addr
 
     # 클라이언트 연결 종료
     def disconnect(self, sock):
@@ -68,62 +61,74 @@ class Server:
             # 클라이언트 정보를 삭제한다.
             del self.client[addr]
 
-    def send(self, sock:socket.socket, data):
-        print(" [ 데이터 클라이언트에게 전송..! ] ")
+    def accept(self):
+        sock, addr = self.ServerSocket.accept()
 
-        # 요청한 클라이언트에게만 회신합니다.
-        if type(data) in []:
+        print(" [ 클라이언트 접속 ] ")
+        self.client[addr] = [sock, ""]
+        print("------------------")
+
+        return sock, addr
+
+    def send(self, sock:socket.socket, data):
+        print(" [ 데이터를 클라이언트에게 전송! ] ")
+
+        # 공통 요청회신 : 로그인, 채팅방나가기
+        # 사용자 요청회신 : 아이디중복확인, 이메일유효, 회원가입, 사용자예약승인, 사용자 구독요청
+        # 관리자 요청회신 : 예약수정, 예약취소, 예약승인용 이메일전송
+        if type(data) in [PerLogin,
+                          PerDuplicateCheck, PerValidEmail, PerJoin, DeleteChat, PerResOk, PerSubTheme,
+                          PerResfix, PerResCancel, PerEmailSend]:
             self.send_client(sock, data)
 
+        # 같은 채팅방 멤버에게만 데이터 전송 : 사용자 채팅, 관리자 채팅
+        elif type(data) in [ReqUserChat, ReqMngChat]:
+            self.send_message(data)
+
     # 요청 클라이언트(사용자, 관리자)에게 전송
-    def send_client(self, sock:socket.socket, data):
+    def send_client(self, sock: socket.socket, data):
         if self.connected():
             sock.sendall(pickle.dumps(data))
             return True
         else:
             return False
 
-    # 관리자에게 전송
-    def send_manager(self, sock: socket, data):
-        if self.connected():
-            manager_id = self.client[sock.getpeername()][1]
-            print(f"manager_id : {manager_id}")
-            print(f"id_from_data : {data.user_id}, {data.manager_id}")
-
-        send_id = data.user_id
-
-        for client in self.client.values():
-            print(f"--- {client[1]}, {send_id}")
-            if client[1] == send_id:
-                client[0].sendall(pickle.dumps(data))
-                break
-
     # 채팅방 멤버(사용자, 관리자)에게 전송
     def send_message(self, data):
         if self.connected():
             if type(data) == ReqUserChat:
-                member = self.db.find_chatroom_id(data.user_id)
+                print(" [ 사용자의 채팅 메세지 전송 ] ")
 
-            print(" [ 채팅 메세지 전송 ] ")
-            print(f" member : {member} ")
+                for idx, client in enumerate(self.client.values()):
+                    print(f"client[1] : {client[1]}")
+                    print(f" 주석 필요 ! ")
+                    if data.user_id != client[1]:
+                        client[0].sendall(pickle.dumps(data))
 
-            for idx, client in enumerate(self.client.values()):
-                print(f"client[1] : {client[1]}")
-                print(f" 주석 필요 ! ")
-                if data.user_id != client[1] and client[1] in member:
-                    client[0].sendall(pickle.dumps(data))
+                    # 메세지 발송내역 저장(only once)
+                    if idx == 0:
+                        self.db.insert_data(data)
+                    return True
 
+            if type(data) == ReqMngChat:
+                print(" [ 관리자의 채팅 메세지 전송 ] ")
 
-                # 메세지 발송내역 저장(only once)
-                if idx == 0:
-                    self.db.insert_data(data)
-            return True
+                for idx, client in enumerate(self.client.values()):
+                    print(f"client[1] : {client[1]}")
+                    print(f" 주석 필요 ! ")
+                    if data.manager_id != client[1]:
+                        client[0].sendall(pickle.dumps(data))
+
+                    # 메세지 발송내역 저장(only once)
+                    if idx == 0:
+                        self.db.insert_data(data)
+                return True
 
         # 클라이언트와 연결이 되지 않은 상태
         else:
             return False
 
-    # 발송자를 제외한 나머지 접속자에게 발송(예약가능, 마감변동)
+    # 발송자를 제외한 나머지 접속자에게 발송
     def send_exclude_sender(self, sock: socket.socket, data):
         if self.connected():
             for idx, client in enumerate(self.client.values()):
@@ -134,14 +139,20 @@ class Server:
         else:
             return False
 
+    def compress_data(self, data):
+        return zlib.compress(data.encode('utf-8'))
+
+    def decompress_data(self, data):
+        return zlib.decompress(data).decode('utf-8')
+
     def recevie(self, sock:socket.socket):
         # 데이터 발송 클라이언트 주소 반환
         try:
             # 클라이언트 소켓으로부터 데이터 수신받기
             recv_message = socket.recv(4096)
-
             # 데이터 수신 실패시 오류를 발생시킨다.
             if not recv_message:
+                print("[ recevie error ]")
                 raise
 
             # 수신 받은 데이터를 변환하여 받환받는다
@@ -181,10 +192,9 @@ class Server:
             perdata : PerLogin = self.db.login(data)
 
         # 로그아웃 요청
-        elif type(data) == Logout:
-            user_id = self.client[sock.getpeername()][1]
-            self.client[sock.getpeername()][1] = ""
-            perdata: LoginInfo([user_id], False)
+        # elif type(data) == Logout:
+        #     user_id = self.client[sock.getpeername()][1]
+        #     self.client[sock.getpeername()][1] = ""
 
         # 사용자 구독알림 요청
         elif type(data) == ReqSubTheme:
@@ -204,11 +214,6 @@ class Server:
         elif type(data) == ResMngOk:
             perdata: PerEmailSend = self.db.send_email(data)
 
-        # 관리자 채팅방 리스트업 요청
-        elif type(data) == CallAllChat:
-            self.db.get_chatlist_by_id(data)
-            perdata=data
-
         # 관리자 예약 수정 요청
         elif type(data) == ReqResFix:
             perdata: PerResfix = self.db.update_restb(data)
@@ -217,7 +222,7 @@ class Server:
         elif type(data) == ReqResCancel:
             perdata: PerResCancel = self.db.delete_restb(data)
 
-    def handler(self, sock, addr):
+    def handler(self, sock, queue_: queue.Queue):
         while True:
             data = self.recevie(sock)
 
@@ -227,23 +232,29 @@ class Server:
             print("[ 데이터 수신중 ]")
             # 수신된 데이터에 따른 결과 반환값을 클라이언트로 보내주기
             print(data)
+            # 클라이언트에게 받은 데이터를 Queue에 추가
+            queue_.put(data)
 
             while True:
                 try:
-                    process_data = self.process_data(sock, addr)
+                    # Queue에서 데이터 얻기
+                    get_data = queue_.get(block=False)
+                    process_data = self.process_data(sock, get_data)
                     print("[ 데이터 처리중 ]")
                     self.send(sock, process_data)
                     print("[ 데이터 처리완 ]")
+                    queue_.task_done()
                 except Exception as e:
-                    #오류 확인
                     print(f"Error occurred: {e}")
 
 if __name__ == "__main__":
     server = Server()
+    # 데이터를 받을 Queue 추가
+    data_queue = queue.Queue(maxsize=100)
 
     while True:
-        print("서버 ON AND Watiting..")
+        print("서버 Watiting..")
 
         c_sock, c_addr = server.accept()
-        c_thread = Thread(target=server.handler, args=(c_sock, c_addr), daemon=True)
+        c_thread = Thread(target=server.handler, args=(c_sock,data_queue), daemon=True)
         c_thread.start()

@@ -60,15 +60,6 @@ class ReqMngChat:
         self.manager_id = manager_id
         self.msg = msg
 
-# 관리자의 채팅방 리스트 요청
-class CallAllChat:
-    def __init__(self, res_no:int, res_id, res_ip, last_date, last_nm):
-        self.res_no = res_no
-        self.res_id = res_id
-        self.res_ip = res_ip
-        self.last_date = last_date
-        self.last_nm = last_nm
-
 # 관리자의 예약 / 구독 승인 요청 + 이메일 전송
 class ResMngOk:
     def __init__(self, r_email: str, e_type: str):
@@ -77,29 +68,17 @@ class ResMngOk:
 
 # 관리자의 예약수정 요청
 class ReqResFix:
-    def __init__(self, th_nm: str, th_date: str, th_time: str, th_price: str,
-                 th_num: str, th_name: str, th_phone: str, th_paytype: str):
-        self.th_nm = th_nm
-        self.th_date = th_date
-        self.th_time = th_time
+    def __init__(self, user_id: str, th_price: str, th_num: str, th_name: str, th_phone: str):
+        self.user_id = user_id
         self.th_price = th_price
         self.th_num = th_num
         self.th_name = th_name
         self.th_phone = th_phone
-        self.th_paytype = th_paytype
 
 # 관리자의 예약취소 요청
 class ReqResCancel:
-    def __init__(self, th_nm: str, th_date: str, th_time: str, th_price: str,
-                 th_num: str, th_name: str, th_phone: str, th_paytype: str):
-        self.th_nm = th_nm
-        self.th_date = th_date
-        self.th_time = th_time
-        self.th_price = th_price
-        self.th_num = th_num
-        self.th_name = th_name
-        self.th_phone = th_phone
-        self.th_paytype = th_paytype
+    def __init__(self, user_id:str):
+        self.user_id = user_id
 
 # --- 공통 요청
 
@@ -109,15 +88,10 @@ class ReqLogin:
         self.login_id = login_id
         self.login_pw = login_pw
 
-# 사용자, 관리자의 채팅 조회 요청
-class ChatCNT:
-    def __init__(self, user_id:str):
-        self.user_id = user_id
-
 # 사용자, 관리자의 로그아웃 요청
-class Logout:
-    def __init__(self, user_id: str):
-        self.user_id = user_id
+# class Logout:
+#     def __init__(self, user_id: str):
+#         self.user_id = user_id
 
 # 사용자, 관리자의 채팅 삭제 요청
 class DeleteChat:
@@ -125,12 +99,6 @@ class DeleteChat:
         self.user_id = user_id
 
 # --- 서버의 허가응답
-
-# 채팅 송수신 응답
-class Perchat:
-    def __init__(self, sender_id: str, msg: str):
-        self.sender_id = sender_id
-        self.msg = msg
 
 # 로그인 허가 응답 : 허가번호, 아이디
 # rescode = 0 ("아이디 존재하지 않음")
@@ -141,14 +109,6 @@ class PerLogin:
         self.rescode = rescode
         self.login_id = login_id
         self.user_info = user_info
-
-# 로그인 유저 정보 발송
-# len(list)=1: 신규로 로그인/로그아웃 발행할때 발송용
-# len(list)>1: 전체 로그인 유저 정보 발송용
-class LoginInfo:
-    def __init__(self, id_: list, login=True):
-        self.id_ = id_
-        self.login = login
 
 # 아이디 중복 체크 응답 : True(중복), False(중복아님)
 class PerDuplicateCheck:

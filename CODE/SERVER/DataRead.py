@@ -108,7 +108,7 @@ class DataRead:
         df = pd.read_sql(sql, self.conn)
         return df
 
-    # 원하는 데이터에 정도 일괄 추가
+    # 원하는 데이터에 정보 일괄 추가
     def insert_data(self, tb_name, data: dict, user_id=""):
         size = len(data)
 
@@ -119,6 +119,7 @@ class DataRead:
             else:
                 self.conn.execute(sql, data[k])
         self.commit_db()
+        self.end_conn()
 
     def membership_id_check(self, data: ReqDuplicateCheck) -> PerDuplicateCheck:
         """클라이언트 중복 아이디 확인 요청 -> 서버 db에서 아이디 중복 여부 응답"""
@@ -182,6 +183,7 @@ class DataRead:
                           (data.user_id, data.msg_type, data.msg, data.send_time))
         self.commit_db()
         print(f" [메세지 저장 완료] ")
+        self.end_conn()
 
     def save_subtb(self, data: ReqSubTheme) -> PerSubTheme:
         print("[ 구독 요청 저장 완료 ]")
@@ -226,20 +228,47 @@ class DataRead:
             self.conn.close()
         return result
 
-    def get_chatlist_by_id(self):
-        pass
-        #tablewidget에 뿌려질 개설된 채팅방 리스트를 그대로 가져와야함
-        #RESERVATION, CHATROOM_{ID} JOIN이 필요함
-        #
+    def get_tables_starting_with(self, want:str, prefix:str):
+        if want == 'part':
+            df = pd.read_sql(f"select * from {prefix}")
+            print(f"df : {df}")
+
+        elif want == 'all':
+            self.conn.execute("SELECT tbl_name FROM sqlite_master WHERE type='table' AND name LIKE ?", (prefix + '%',))
+            table_names = [row[0] for row in self.conn.cursor().fetchall()]
+
+            # df 로 만들지 고민해야하는 부분..
+            for table_name in table_names:
+                print("Table:", table_name)
+                self.conn.execute("SELECT * FROM {}".format(table_name))
+                rows = self.conn.cursor().fetchall()
+                for row in rows:
+                    print(row)
+
+        self.end_conn()
 
     # 예약테이블 행 수정
-    def update_restb(self, data):
-        pass
+    def update_restb(self, data: ReqResFix) -> PerResfix:
+        result: PerResfix = PerResfix(isfix=True)
+        self.conn.execute(f"update RESERVATION SET "
+                          f"TH_PRICE = {data.th_price},"
+                          f" TH_NUM = {data.th_num},"
+                          f" TH_NAME = {data.th_name},"
+                          f" TH_PHONE = {data.th_phone} "
+                          f"where USER_ID = {data.user_id}")
+        self.commit_db()
+        self.end_conn()
+        return result
 
     # 예약테이블 행 삭제
-    def delete_restb(self, data):
-        pass
+    def delete_restb(self, data: ReqResCancel) -> PerResCancel:
+        result: PerResCancel = PerResCancel(iscancel=True)
+        self.conn.execute(f"delete from RESERVATION "
+                          f"WHERE USER_ID = {data.user_id}")
 
+        self.commit_db()
+        self.end_conn()
+        return result
 
 if __name__ == '__main__':
     App = QApplication(sys.argv)

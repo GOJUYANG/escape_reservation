@@ -1,9 +1,8 @@
 from PyQt5.QtWidgets import QDialog
 from PyQt5.QtCore import Qt
+from CODE.SCREEN.UI_DialongWarning import Ui_DlgWarning
 
-# from CODE.SCREEN.UI_DialogWarning import Ui_DlgWarning
-
-class DialogWarning(QDialog,):
+class DialogWarning(QDialog, Ui_DlgWarning):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
@@ -42,7 +41,7 @@ class DialogWarning(QDialog,):
         elif bt_cnt == 2:
             self.layout_double.setVisible(True)
             self.btn_single.setVisible(False)
-        if text:
+        if t_type == 'login':
             self.lbl_text.setText(text)
         elif t_type == 'used_id':
             self.lbl_text.setText('사용 중인 아이디입니다.')
@@ -70,24 +69,14 @@ class DialogWarning(QDialog,):
             self.lbl_text.setText('이메일 인증을 진행 해주세요.')
         elif t_type == 'email_no_input':
             self.lbl_text.setText('이메일 주소를 입력해주세요.')
-        elif t_type == 'email_num_no_input':
-            self.lbl_text.setText('이메일 인증번호를 입력해주세요.')
-        elif t_type == 'vaild_email_addr':
+        elif t_type == 'vaild_email':
             self.lbl_text.setText('유효한 이메일 주소 입니다.')
         elif t_type == 'not_vaild_email_addr':
             self.lbl_text.setText('유효한 이메일 주소가 아닙니다.')
-        elif t_type == 'email_send':
-            self.lbl_text.setText('가입을 위한 인증번호 이메일이 발송되었습니다.')
-        elif t_type == 'email_check':
-            self.lbl_text.setText('이메일 인증 완료')
-        elif t_type == 'email_not_check':
-            self.lbl_text.setText('이메일 인증 실패, 확인 후 재입력 해주시기 바랍니다.')
         elif t_type == 'success_join_membership':
-            self.lbl_text.setText('"회원가입 완료, 자몽톡 가입을 환영 합니다')
+            self.lbl_text.setText('"회원가입 완료, 가입을 환영 합니다')
         elif t_type == 'failed_join_membership':
             self.lbl_text.setText('"회원가입 실패, 회원가입에 실패하였습니다.')
-        elif t_type == 'exit_chat_room':
-            self.lbl_text.setText('대화 내용이 모두 삭제됩니다.\n정말 채팅방을 나가시겠습니까?')
-        elif t_type == 'use_ban_word':
-            self.lbl_text.setText('[전송 불가] 욕설,비방은 자몽톡에서 금지됩니다.')
+        elif t_type == 'email_send':
+            self.lbl_text.setText('예약 내역 확인 이메일이 발송되었습니다.')
 

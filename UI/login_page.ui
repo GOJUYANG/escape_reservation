@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>419</width>
-    <height>609</height>
+    <height>0</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,7 +25,7 @@
    <property name="currentIndex">
     <number>1</number>
    </property>
-   <widget class="QWidget" name="page">
+   <widget class="QWidget" name="page_login">
     <widget class="QLabel" name="background_login">
      <property name="geometry">
       <rect>
@@ -119,13 +119,6 @@
        </spacer>
       </item>
       <item>
-       <widget class="QRadioButton" name="radio_id_save">
-        <property name="text">
-         <string>아이디 저장</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QPushButton" name="btn_join_login">
         <property name="minimumSize">
          <size>
@@ -186,7 +179,7 @@
      </property>
     </widget>
    </widget>
-   <widget class="QWidget" name="page_2">
+   <widget class="QWidget" name="page_join">
     <widget class="QLabel" name="background_ship">
      <property name="geometry">
       <rect>
@@ -241,9 +234,9 @@
     <widget class="QPushButton" name="btn_join_ship">
      <property name="geometry">
       <rect>
-       <x>40</x>
+       <x>220</x>
        <y>550</y>
-       <width>351</width>
+       <width>171</width>
        <height>31</height>
       </rect>
      </property>
@@ -308,7 +301,7 @@
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
       </property>
       <property name="placeholderText">
-       <string>이름</string>
+       <string>닉네임</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="lb_ship_pwd1">
@@ -361,12 +354,12 @@
        <rect>
         <x>20</x>
         <y>220</y>
-        <width>31</width>
+        <width>41</width>
         <height>16</height>
        </rect>
       </property>
       <property name="text">
-       <string>이름</string>
+       <string>닉네임</string>
       </property>
      </widget>
      <widget class="QLabel" name="lb_pwd1">
@@ -494,6 +487,19 @@
        <string>유효확인</string>
       </property>
      </widget>
+    </widget>
+    <widget class="QPushButton" name="btn_join_cancel">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>550</y>
+       <width>171</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>가입취소</string>
+     </property>
     </widget>
    </widget>
   </widget>

@@ -1,8 +1,9 @@
 import socket
 import pickle
+import zlib
 
 class Client:
-    def __init__(self, server_ip="10.10.20.104", server_port=9999):
+    def __init__(self, server_ip="10.10.20.104", server_port=3333):
         self.server_ip = server_ip
         self.server_port = server_port
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -19,14 +20,21 @@ class Client:
         except socket.error:
             return False
 
+    def compress_data(self,data):
+        return zlib.compress(data.encode('utf-8'))
+
+    def decompress_data(self, data):
+        return zlib.decompress(data).decode('utf-8')
+
     # 데이터 수신
     def recevie(self):
         try:
-            recevie_bytes = self.sock.recv(4096)
+            recevie_bytes = self.sock.recv(16184)
             if not recevie_bytes:
-                raise
+                print(" [ 데이터 수신 오류 ] ")
 
             data = pickle.loads(recevie_bytes)
+            print(data)
             return data
         except socket.error:
             self.disconnect()
@@ -35,7 +43,9 @@ class Client:
     # 데이터 발송
     def send(self, data):
         try:
-            self.sock.sendall(pickle.dumps(data))
+            compressed_data = self.compress_data(data)
+            self.sock.sendall(compressed_data)
+            # self.sock.sendall(pickle.dumps(data))
             return True
         except socket.error:
             self.disconnect()
